@@ -1,1 +1,33 @@
-#TEST
+#I have installed theses packages --> install.packages("Tmisc")& install.packages("devtools")
+Error in install.packages : Updating loaded packages
+install.packages("reshape") & install.packages("ggrepel") & install.packages("DEGreport") & install.packages("RColorBrewer") & install.packages("pheatmap")
+
+ with(all_data, plot(log2FoldChange, -log10(pvalue), pch=20, main="Volcano plot", xlim=c(-2.5,2)))
+Error in plot(log2FoldChange, -log10(pvalue), pch = 20, main = "Volcano plot",  : 
+object 'log2FoldChange' not found
+
+threshold_OE <- all_data$hepc_bs < 0.05 
+Warning message:
+In Ops.factor(all_data$hepc_bs, 0.05) : ‘<’ not meaningful for factors
+
+# then I tried ggplot 
+
+ggplot(all_data) +
++   geom_point(aes(x=log2FoldChange, y=-log10(hepc_bs), colour=threshold)) +
++   ggtitle("Mov10 overexpression") +
++   xlab("log2 fold change") + 
++   ylab("-log10 adjusted p-value") +
++   #scale_y_continuous(limits = c(0,50)) +
++   theme(legend.position = "none",
++         plot.title = element_text(size = rel(1.5), hjust = 0.5),
++         axis.title = element_text(size = rel(1.25)))
+Error in FUN(X[[i]], ...) : object 'log2FoldChange' not found
+
+# another try in ggplot 
+
+> ggplot(all_data) +
++   geom_point(aes(x=log2(), y=-log10(hepc_bs), colour=threshold)) +
++   ggtitle("Mov10 overexpression") +
++   xlab("log2 fold change") + 
++   ylab("-log10 adjusted p-value")
+Error in log2() : 0 arguments passed to 'log2' which requires 1
